@@ -47,39 +47,56 @@ def newclient():
         print(fields)
         allfill()
         clearer()
-
-
-
     
 def editclient():
     pass
     #This will be a copy of newclient() but the textvariables will use the get()
     #method to obtain all of the current information
 
+def beginmenu():
+    def hello():
+        print("Hi")
+    clearer()
+    #Defining the main menu
+    bar = Menu(root)
+    #defining the first dropdown menu
+    filebar = Menu(bar, tearoff=0)
+    clientbar = Menu(bar, tearoff=0)
+    #Adding an item to the dropdown menu
+    filebar.add_command(label="Open", command=hello)
+    filebar.add_command(label="Save", command=hello)
+    clientbar.add_command(label="New Client", command=newclient)
+    clientbar.add_command(label="Client Status", command=hello)
+    clientbar.add_command(label="Edit Client Information", command=hello)
+    #Adding the new dropdown menu to the full menu bar
+    bar.add_cascade(label="File", menu=filebar)
+    bar.add_cascade(label="Client", menu=clientbar)
+    #Display the menu
+    root.config(menu=bar)
 
-
-
-b = Button(root, text="hi").grid(row=0, column=0)
-#Comand for things to run
-def hello():
-    print("Hello")
-#Defining the main menu
-bar = Menu(root)
-#defining the first dropdown menu
-filebar = Menu(bar, tearoff=0)
-clientbar = Menu(bar, tearoff=0)
-#Adding an item to the dropdown menu
-filebar.add_command(label="Open", command=hello)
-filebar.add_command(label="Save", command=hello)
-clientbar.add_command(label="New Client", command=newclient)
-clientbar.add_command(label="Client Status", command=hello)
-clientbar.add_command(label="Edit Client Information", command=hello)
-#Adding the new dropdown menu to the full menu bar
-bar.add_cascade(label="File", menu=filebar)
-bar.add_cascade(label="Client", menu=clientbar)
-#Display the menu
-root.config(menu=bar)
-
+def login():
+    x = open("Passwords.txt", "r")
+    def check():
+        for line in x:
+            y = line
+            y = y.split()
+            if y[0] == username.get():
+                if y[1] == password.get():
+                    return True
+    if check():
+        x.close()
+        beginmenu()
+    else:
+        print("Wrong username or password")
+    x.close()
 
 frame = Frame(width=500, height=250).grid(row=0, column=0, rowspan=20, columnspan=20)
+UserL = Label(root, text="Username:").grid(row=0, column=0, columnspan=20, rowspan=5)
+username = StringVar()
+UserE = Entry(root, textvariable=username).grid(row=2, column=0, columnspan=20, rowspan=5)
+PassL = Label(root, text="Password:").grid(row=5, column=0, columnspan=20, rowspan=5)
+password = StringVar()
+PassE = Entry(root, textvariable=password).grid(row=7, column=0, columnspan=20, rowspan=5)
+OK = Button(root, text="Log In", command=lambda:login()).grid(row=10, column=0, columnspan=20, rowspan=5)
+
 root.mainloop()
