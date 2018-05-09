@@ -53,6 +53,15 @@ def editclient():
     #This will be a copy of newclient() but the textvariables will use the get()
     #method to obtain all of the current information
 
+def adminpage():
+    clearer()
+    AdminL = Label(root, text="Confirm Admin Password").grid(row=5, column=0, columnspan=20, rowspan=5)
+    adminp = StringVar()
+    PassE = Entry(root, textvariable=adminp).grid(row=7, column=0, columnspan=20, rowspan=5)
+
+
+
+
 def beginmenu():
     def hello():
         print("Hi")
@@ -62,15 +71,19 @@ def beginmenu():
     #defining the first dropdown menu
     filebar = Menu(bar, tearoff=0)
     clientbar = Menu(bar, tearoff=0)
+    helpbar = Menu(bar, tearoff=0)
     #Adding an item to the dropdown menu
     filebar.add_command(label="Open", command=hello)
     filebar.add_command(label="Save", command=hello)
     clientbar.add_command(label="New Client", command=newclient)
     clientbar.add_command(label="Client Status", command=hello)
     clientbar.add_command(label="Edit Client Information", command=hello)
+    helpbar.add_command(label="Program Instructions", command=hello)#Clear the screen and add a few pages of text that help the user learn how this program works
+    helpbar.add_command(label="Admin", command=adminpage)
     #Adding the new dropdown menu to the full menu bar
     bar.add_cascade(label="File", menu=filebar)
     bar.add_cascade(label="Client", menu=clientbar)
+    bar.add_cascade(label="Help", menu=helpbar)
     #Display the menu
     root.config(menu=bar)
 
@@ -91,10 +104,10 @@ def login():
     x.close()
 
 frame = Frame(width=500, height=250).grid(row=0, column=0, rowspan=20, columnspan=20)
-UserL = Label(root, text="Username:").grid(row=0, column=0, columnspan=20, rowspan=5)
+UserL = Label(root, text="Username").grid(row=0, column=0, columnspan=20, rowspan=5)
 username = StringVar()
 UserE = Entry(root, textvariable=username).grid(row=2, column=0, columnspan=20, rowspan=5)
-PassL = Label(root, text="Password:").grid(row=5, column=0, columnspan=20, rowspan=5)
+PassL = Label(root, text="Password").grid(row=5, column=0, columnspan=20, rowspan=5)
 password = StringVar()
 PassE = Entry(root, textvariable=password).grid(row=7, column=0, columnspan=20, rowspan=5)
 OK = Button(root, text="Log In", command=lambda:login()).grid(row=10, column=0, columnspan=20, rowspan=5)
