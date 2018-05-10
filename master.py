@@ -54,10 +54,22 @@ def editclient():
     #method to obtain all of the current information
 
 def adminpage():
+    def page():
+        clearer()
+    def admincheck():
+        x = open("Passwords.txt", "r")
+        for line in x:
+            y = line
+            y = y.split()
+            if adminp.get() == y[1]:
+                page()
+            else:
+                false = Label(root, text="Wrong username or password").grid(row=0, column=0, columnspan=20, rowspan=5)
     clearer()
     AdminL = Label(root, text="Confirm Admin Password").grid(row=5, column=0, columnspan=20, rowspan=5)
     adminp = StringVar()
     PassE = Entry(root, textvariable=adminp).grid(row=7, column=0, columnspan=20, rowspan=5)
+    login = Button(root, text="Login", command=lambda:admincheck).grid(row=10, column=0, columnspan=20, rowspan=5)
 
 
 
@@ -100,16 +112,16 @@ def login():
         x.close()
         beginmenu()
     else:
-        print("Wrong username or password")
+        false = Label(root, text="Wrong username or password").grid(row=0, column=0, columnspan=20, rowspan=5)
     x.close()
 
 frame = Frame(width=500, height=250).grid(row=0, column=0, rowspan=20, columnspan=20)
-UserL = Label(root, text="Username").grid(row=0, column=0, columnspan=20, rowspan=5)
+UserL = Label(root, text="Username").grid(row=2, column=0, columnspan=20, rowspan=5)
 username = StringVar()
-UserE = Entry(root, textvariable=username).grid(row=2, column=0, columnspan=20, rowspan=5)
-PassL = Label(root, text="Password").grid(row=5, column=0, columnspan=20, rowspan=5)
+UserE = Entry(root, textvariable=username).grid(row=4, column=0, columnspan=20, rowspan=5)
+PassL = Label(root, text="Password").grid(row=7, column=0, columnspan=20, rowspan=5)
 password = StringVar()
-PassE = Entry(root, textvariable=password).grid(row=7, column=0, columnspan=20, rowspan=5)
-OK = Button(root, text="Log In", command=lambda:login()).grid(row=10, column=0, columnspan=20, rowspan=5)
+PassE = Entry(root, textvariable=password).grid(row=9, column=0, columnspan=20, rowspan=5)
+OK = Button(root, text="Log In", command=lambda:login()).grid(row=12, column=0, columnspan=20, rowspan=5)
 
 root.mainloop()
