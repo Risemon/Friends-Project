@@ -54,26 +54,46 @@ def editclient():
     #method to obtain all of the current information
 
 def adminpage():
-    def page():
-        clearer()
+    clearer()
+    AdminL = Label(root, text="Confirm Admin Password").grid(row=5, column=0, columnspan=20, rowspan=5)
+    global adminp
+    adminp = StringVar()
+    PassE = Entry(root, textvariable=adminp).grid(row=7, column=0, columnspan=20, rowspan=5)
+    login = Button(root, text="Login", command=lambda:admincheck()).grid(row=10, column=0, columnspan=20, rowspan=5)
     def admincheck():
         x = open("Passwords.txt", "r")
         for line in x:
             y = line
             y = y.split()
+            global adminp
             if adminp.get() == y[1]:
-                page()
+                adminpager()
             else:
                 false = Label(root, text="Wrong username or password").grid(row=0, column=0, columnspan=20, rowspan=5)
-    clearer()
-    AdminL = Label(root, text="Confirm Admin Password").grid(row=5, column=0, columnspan=20, rowspan=5)
-    adminp = StringVar()
-    PassE = Entry(root, textvariable=adminp).grid(row=7, column=0, columnspan=20, rowspan=5)
-    login = Button(root, text="Login", command=lambda:admincheck).grid(row=10, column=0, columnspan=20, rowspan=5)
+            x.close()
+            break
+    def adminpager():
+        clearer()
+        title = Label(root, text="Administrator actions").grid(row=0, column=0, columnspan=20, rowspan=5)
+        new_password = Button(root, text="Add a new username and password", command=lambda:create_user()).grid(row=2, column=0, columnspan=10, rowspan=5, sticky="e")
+        del_password = Button(root, text="Remove a username and password").grid(row=2, column=10, columnspan=10, rowspan=5, sticky="w")
+    def create_user():
+        clearer()
+        x = open("Passwords.txt", "a")
+        usern = StringVar()
+        passn = StringVar()
+        UserL = Label(root, text="New Username").grid(row=0, column=0, columnspan=20, rowspan=5)
+        UserE = Entry(root, textvariable=usern).grid(row=2, column=0, columnspan=20, rowspan=5)
+        PassL = Label(root, text="New Password").grid(row=5, column=0, columnspan=20, rowspan=5)
+        PassE = Entry(root, textvariable=passn).grid(row=7, column=0, columnspan=20, rowspan=5)
+        final = Button(root, text="Create user", command=lambda:creater()).grid(row=9, column=0, columnspan=20, rowspan=5)
+        def creater():
+            x.write("\n" + usern.get() + " " + passn.get())
+            x.close()
+            clearer()
+            results = Label(root, text="New user created").grid(row=0, column=0, columnspan=20, rowspan=5)
 
-
-
-
+        
 def beginmenu():
     def hello():
         print("Hi")
