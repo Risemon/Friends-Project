@@ -77,6 +77,7 @@ def adminpage():
         title = Label(root, text="Administrator actions").grid(row=0, column=0, columnspan=20, rowspan=5)
         new_password = Button(root, text="Add a new username and password", command=lambda:create_user()).grid(row=2, column=0, columnspan=10, rowspan=5, sticky="e")
         del_password = Button(root, text="Remove a username and password").grid(row=2, column=10, columnspan=10, rowspan=5, sticky="w")
+        edit_password = Button(root, text="Change a users password", command=lambda:edit_user()).grid(row=5, column=0, columnspan=10, rowspan=5, sticky="e")
     def create_user():
         clearer()
         x = open("Passwords.txt", "a")
@@ -92,6 +93,12 @@ def adminpage():
             x.close()
             clearer()
             results = Label(root, text="New user created").grid(row=0, column=0, columnspan=20, rowspan=5)
+    def edit_user():
+        clearer()
+        options = ["one", "two", "three"]
+        var = StringVar()
+        droper = OptionMenu(root, var, "one", "two", "three").grid(row=0, column=0, columnspan=20, rowspan=5)
+
 
         
 def beginmenu():
